@@ -1,12 +1,17 @@
-import React from "react";
-import Books from "./pages/Books";
+import React, {Component, Fragment} from "react";
 
-function App() {
-  return (
-    <div>
-      <Books />
-    </div>
-  );
+import Header from "./components/Header/Header"
+import Container from "./components/Container/Container"
+
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
+        <Header />
+        <Container />
+      </Fragment>
+    );
+  }
 }
 
 export default App;
