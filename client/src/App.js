@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar"
 import Header from "./components/Header/Header"
+import SearchForm from "./components/SearchForm/SearchForm"
 import Search from "./pages/Search"
 import Saved from "./pages/Saved"
 
@@ -9,7 +11,9 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
+          <NavBar />
           <Header />
+          <SearchForm />
           <Switch>
             <Route exact path="/" component={Search}/>
             <Route path="/saved" component={Saved}/>

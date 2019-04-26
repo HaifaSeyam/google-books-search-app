@@ -1,21 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Typography, Toolbar, AppBar, Tabs } from '@material-ui/core';
-import Tab from '@material-ui/core/Tab';
+import { Grid, Typography, Paper } from '@material-ui/core';
+import "./Header.css"
 
 function Header() {
   return (
-    <AppBar position="static">
-        <Toolbar>
-            <Typography variant="h3" color="inherit">
-                Google Books
+      <Grid item sm={12}>
+        <Paper className="paper">
+            <Typography variant="h3" color="inherit" align="center">
+                (React) Google Books Search
             </Typography>
-            <Tabs>
-                <Tab value={0} label="Serach" to='/' component={Link}/>
-                <Tab value={1} label="Saved" to='/Saved' component={Link}/>
-            </Tabs>
-        </Toolbar>
-    </AppBar>
+            <Typography variant="h4" color="inherit" align="center">
+                Search for and Save Books of Interest
+            </Typography>
+        </Paper>
+      </Grid>    
   );
 }
 
