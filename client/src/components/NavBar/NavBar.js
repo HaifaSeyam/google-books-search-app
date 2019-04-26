@@ -8,13 +8,17 @@ function NavBar() {
     <Grid container>
       <AppBar position="static">
         <Toolbar>
-            <Typography variant="h3" color="inherit">
-                Google Books
-            </Typography>
-            <Tabs value={0}>
-                <Tab label="Serach" to='/' component={Link}/>
-                <Tab label="Saved" to='/Saved' component={Link}/>
-            </Tabs>
+          <Grid container>
+              <Typography variant="h3" color="inherit">
+                  Google Books
+              </Typography>
+          </Grid>
+          <Grid container justify="flex-end">
+              <Tabs value={0}>
+                  <Tab label="Serach" to='/' component={Link}/>
+                  <Tab label="Saved" to='/Saved' component={Link}/>
+              </Tabs>
+          </Grid>
         </Toolbar>
       </AppBar>
     </Grid>

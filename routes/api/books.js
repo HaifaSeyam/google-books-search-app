@@ -1,16 +1,20 @@
-const router = require("express").Router();
-const booksController = require("../../controllers/booksController");
+require("dotenv").config();
+const axios = require("axios");
 
-// Matches with "/api/books"
-router.route("/")
-  .get(booksController.findAll)
-  .post(booksController.create);
+module.exports = function(app) {
 
-// Matches with "/api/books/:id"
-router
-  .route("/:id")
-  .get(booksController.findById)
-  .put(booksController.update)
-  .delete(booksController.remove);
-
-module.exports = router;
+    app.get("/search", (req, res) => {
+        // set bookTitle to the req.body.title with spaces replaced with plus signs(+)
+        let bookTitle = req.body.title.replace(/\s/g, "+");
+        
+        axios.get(
+            `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${process.env.GOOGLE_BOOKS_KEY}`
+        ).then(response => {
+                res.json(response.data.items)
+            }
+        ).catch(err => {
+                res.json(err)
+            }
+        );
+    });
+}
