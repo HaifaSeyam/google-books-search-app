@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import axios from "axios";
 import { Grid, Paper, Typography, TextField, Button } from '@material-ui/core';
+import Books from "../components/Books/Books";
 
 import "./Search.css"
 
@@ -27,11 +28,11 @@ class Search extends Component {
     //   API.searchBook(this.state.title)
     //     .then(res => console.log(res))
     //     .catch(err => console.log(err));
-      this.getBooks(this.state.title);
+      this.searchBook(this.state.title);
      }
   };
 
-  getBooks = title => {
+  searchBook = title => {
     axios.request({
       method: 'get',
       url: 'https://www.googleapis.com/books/v1/volumes?q=' + title
@@ -43,9 +44,13 @@ class Search extends Component {
       //image
       console.log(response.data.items[0].volumeInfo.imageLinks.smallThumbnail);
       //description
-      console.log(response.data.items[0].searchInfo.textSnippet);
+      console.log(response.data.items[0].volumeInfo.description);
       //link
       console.log(response.data.items[0].volumeInfo.previewLink);
+      
+      this.setState({
+        books: response.data.items
+      });
 
     }).catch((error) => {
       console.log(error);
@@ -85,6 +90,9 @@ class Search extends Component {
                 onClick={this.handleFormSubmit}>
                   Search
               </Button>
+            </Grid>
+            <Grid item sm={12}>
+              <Books books={this.state.books} />
             </Grid>
           </Grid>
         </Paper>
