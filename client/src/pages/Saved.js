@@ -1,6 +1,17 @@
 import React, { Component, Fragment } from "react";
+import API from "../utils/API";
 
 class Saved extends Component {
+
+  loadBooks = () => {
+    return API.findBook()
+  }
+
+  componentDidMount() {
+    this.loadBooks().then(response => {
+      console.log(response)
+    })
+  }
  
   render() {
     return (

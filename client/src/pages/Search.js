@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import axios from "axios";
 import { Grid, Paper, Typography, TextField, Button } from '@material-ui/core';
 import Books from "../components/Books/Books";
 
@@ -25,39 +24,31 @@ class Search extends Component {
     console.log("OnClick: ", this.state.title)
     event.preventDefault();
     if (this.state.title) {
-    //   API.searchBook(this.state.title)
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err));
-      this.searchBook(this.state.title);
+      API.searchBook(this.state.title)
+        .then(res => {
+          this.setState({
+              books: res.data.items
+            });
+        })
+        .catch(err => console.log(err));
      }
   };
 
-  searchBook = title => {
-    axios.request({
-      method: 'get',
-      url: 'https://www.googleapis.com/books/v1/volumes?q=' + title
-    }).then((response) => {
-      //authors
-      console.log(response.data.items[0].volumeInfo.authors);
-      //title
-      console.log(response.data.items[0].volumeInfo.title);
-      //image
-      console.log(response.data.items[0].volumeInfo.imageLinks.smallThumbnail);
-      //description
-      console.log(response.data.items[0].volumeInfo.description);
-      //link
-      console.log(response.data.items[0].volumeInfo.previewLink);
-      
-      this.setState({
-        books: response.data.items
-      });
+  saveBook = (book, id) => {
+    console.log(id)
+    API.saveBook(book);
 
-    }).catch((error) => {
-      console.log(error);
-    });
+    var newBooksArray = this.state.books.filter(book => book.id != id );
+
+    console.log(newBooksArray)
+    console.log(this.state.books)
+
+    this.setState({
+      books: newBooksArray
+    })
+
   }
 
- 
   render() {
     return (
       <Grid item sm={12}>
@@ -92,7 +83,7 @@ class Search extends Component {
               </Button>
             </Grid>
             <Grid item sm={12}>
-              <Books books={this.state.books} />
+              <Books saveBook={this.saveBook} books={this.state.books} />
             </Grid>
           </Grid>
         </Paper>
