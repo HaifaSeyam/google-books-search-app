@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import API from "../utils/API";
+import axios from "axios";
 import { Grid, Paper, Typography, TextField, Button } from '@material-ui/core';
 
 import "./Search.css"
@@ -23,11 +24,33 @@ class Search extends Component {
     console.log("OnClick: ", this.state.title)
     event.preventDefault();
     if (this.state.title) {
-      API.searchBook(this.state.title)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-    }
+    //   API.searchBook(this.state.title)
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err));
+      this.getBooks(this.state.title);
+     }
   };
+
+  getBooks = title => {
+    axios.request({
+      method: 'get',
+      url: 'https://www.googleapis.com/books/v1/volumes?q=' + title
+    }).then((response) => {
+      //authors
+      console.log(response.data.items[0].volumeInfo.authors);
+      //title
+      console.log(response.data.items[0].volumeInfo.title);
+      //image
+      console.log(response.data.items[0].volumeInfo.imageLinks.smallThumbnail);
+      //description
+      console.log(response.data.items[0].searchInfo.textSnippet);
+      //link
+      console.log(response.data.items[0].volumeInfo.previewLink);
+
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
  
   render() {

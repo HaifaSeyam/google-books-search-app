@@ -3,7 +3,7 @@ const axios = require("axios");
 
 module.exports = function(app) {
 
-    app.get("/search", (req, res) => {
+    app.post("/search", (req, res) => {
         // set bookTitle to the req.body.title with spaces replaced with plus signs(+)
         let bookTitle = req.body.title.replace(/\s/g, "+");
         
@@ -17,4 +17,8 @@ module.exports = function(app) {
             }
         );
     });
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../client/build/index.html"));
+        });
 }
