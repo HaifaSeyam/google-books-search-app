@@ -1,6 +1,7 @@
 require("dotenv").config();
 const axios = require("axios");
 const db = require("../../models");
+const path = require("path");
 
 module.exports = function(app) {
 
@@ -14,18 +15,23 @@ module.exports = function(app) {
     app.post("/saved/:id", (req, res) => {
         axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.id).then(function(results){
 
+        let image = results.data.items[0] && 
+                    results.data.items[0].volumeInfo && 
+                    results.data.items[0].volumeInfo.imageLinks && 
+                    results.data.items[0].volumeInfo.imageLinks.smallThumbnail;
+
         const book = {
             title: results.data.items[0].volumeInfo.title,
             authors: results.data.items[0].volumeInfo.authors,
             description: results.data.items[0].volumeInfo.description,
-            image: results.data.items[0].volumeInfo.imageLinks.smallThumbnail,
+            image: image,
             previewLink: results.data.items[0].volumeInfo.previewLink
         }
 
             db.Book.create(book)
             .then(function(results) {
-                // console.log("added to db")
-                // console.log(results);
+                console.log("added to db")
+                console.log(results);
             })
             .catch(function(err) {
             console.log(err);
