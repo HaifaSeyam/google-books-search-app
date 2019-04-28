@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "mern",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001/",
@@ -25,3 +25,4 @@
     "not op_mini all"
   ]
 }
+
