@@ -31,7 +31,7 @@ module.exports = function(app) {
             db.Book.create(book)
             .then(function(results) {
                 console.log("added to db")
-                console.log(results);
+                // console.log(results);
             })
             .catch(function(err) {
             console.log(err);
