@@ -40,9 +40,6 @@ class Search extends Component {
 
     var newBooksArray = this.state.books.filter(book => book.id != id );
 
-    console.log(newBooksArray)
-    console.log(this.state.books)
-
     this.setState({
       books: newBooksArray
     })

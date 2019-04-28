@@ -12,5 +12,9 @@ export default {
 
   findBook: () => {
     return axios.post("/saved");
+  },
+
+  deleteBook: (id) => {
+    return axios.post(`/delete/${id}`);
   }
 };

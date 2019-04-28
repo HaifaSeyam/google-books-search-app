@@ -45,7 +45,18 @@ module.exports = function(app) {
     });
 
 
-
+    app.post("/delete/:id", (req, res) => {
+        db.Book.findByIdAndDelete(req.params.id).then(
+            (response) => {
+                res.json(response);
+            }
+        ).catch(
+            (err) => {
+                rres.json(error);
+            }
+        );
+            
+    });
 
     app.get("*", (req, res) => {
         res.sendFile(path.join(__dirname, "../client/build/index.html"));
