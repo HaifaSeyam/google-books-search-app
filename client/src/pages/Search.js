@@ -38,7 +38,7 @@ class Search extends Component {
     console.log(id)
     API.saveBook(book);
 
-    var newBooksArray = this.state.books.filter(book => book.id != id );
+    var newBooksArray = this.state.books.filter(book => book.id !== id );
 
     this.setState({
       books: newBooksArray
