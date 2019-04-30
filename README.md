@@ -7,3 +7,8 @@ This is a React-based Google Books Search app that enables users to query and di
 CSS - Material UI - React - ES6 - Javascript - Google Books API
 
 #### Deployed Link
+Deployment to heroku did not work successfuly 
+
+##### App Demo
+
+![google-books-search](demo.gif)
