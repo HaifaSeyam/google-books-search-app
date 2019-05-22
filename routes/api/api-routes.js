@@ -58,7 +58,7 @@ module.exports = function(app) {
             }
         ).catch(
             (err) => {
-                rres.json(error);
+                res.json(err);
             }
         );
             
